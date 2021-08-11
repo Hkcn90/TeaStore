@@ -24,7 +24,7 @@ namespace Service.Controllers
         {
             _signInManager = signInManager;
             _userManager = userManager;
-            //_mapper = mapper;
+            _mapper = mapper;
             _tokenService = tokenService;
         }
 
