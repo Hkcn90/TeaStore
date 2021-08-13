@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AccountService } from '../_services/account.service';
 
 @Component({
   selector: 'app-login',
@@ -7,13 +8,15 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
-  constructor(private router:Router) { }
+  model: any = {}
+  constructor(private accountService:AccountService, private router:Router) { }
 
   ngOnInit(): void {
-  }
-  redirectToHome(){
-    this.router.navigateByUrl('home/dashboard');
+  } 
+  login(){
+    this.accountService.login(this.model).subscribe(response => {
+      this.router.navigateByUrl('/home/dashboard');
+    })
   }
 
 }
