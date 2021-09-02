@@ -1,3 +1,5 @@
+import { Category } from "./Category";
+
 export interface Products {
          Id :number;
           productCode :string
@@ -5,7 +7,7 @@ export interface Products {
           description :string
           status :string
           categoryId :number
-          category :string[]
+          category :Category
          productInventories :string
          productPhotos :string
 }
