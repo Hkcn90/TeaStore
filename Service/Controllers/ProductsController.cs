@@ -34,6 +34,12 @@ namespace Service.Controllers
             var product = await _iProducts.GetProductAsync(id);
             return Ok(product);
         }
+        [HttpPost("AddProduct")]
+        public  ActionResult<string> SaveProduct([FromBody] ProductDto productDto)
+        {
+           var status=  _iProducts.AddProduct(productDto);
+            return status.ToString();
+        }
 
     }
 }

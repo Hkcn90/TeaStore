@@ -7,7 +7,7 @@ namespace Service.Interface
 {
     public interface IProductService
     {
-        void AddProduct(Products product);
+        string AddProduct(ProductDto productDto);
         Task<IEnumerable<ProductDto>> GetAllProductsAsync();
         Task<ProductDto> GetProductAsync(int id);
     }

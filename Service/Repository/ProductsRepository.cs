@@ -21,16 +21,19 @@ namespace Service.Repository
             _mapper = mapper;
             _context = context;
         }
-        public void AddProduct(Products product)
+        public string AddProduct(ProductDto productdto)
         {
-            throw new System.NotImplementedException();
+            var product = _mapper.Map<Products>(productdto);
+            _context.Products.AddAsync(product);
+            var status = _context.SaveChangesAsync();
+            return status.ToString();
         }
 
         public async Task<ProductDto> GetProductAsync(int id)
         {
-            return  await _context.Products.Where(x => x.Id == id)
+            return await _context.Products.Where(x => x.Id == id)
                  .Include(ca => ca.Category)
-                 .Include(pr=>pr.ProductInventories)
+                 .Include(pr => pr.ProductInventories)
                  .ProjectTo<ProductDto>(_mapper.ConfigurationProvider)
                  .AsSplitQuery()
                  .SingleOrDefaultAsync();
@@ -38,11 +41,11 @@ namespace Service.Repository
 
         public async Task<IEnumerable<ProductDto>> GetAllProductsAsync()
         {
-           return  await _context.Products
-                 .ProjectTo<ProductDto>(_mapper.ConfigurationProvider)
-                 .ToListAsync();
+            return await _context.Products
+                  .ProjectTo<ProductDto>(_mapper.ConfigurationProvider)
+                  .ToListAsync();
 
-            
+
         }
     }
 }
